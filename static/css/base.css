@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cedarville+Cursive&family=Lobster&display=swap');
+
+.btitle {
+    font-family: 'Cedarville Cursive', cursive;
+}
+
+small {
+    font-family: 'Cedarville Cursive', cursive;
+    font-size: large;
+    font-weight: 700;
+}
+
+.navbar-brand{
+    font-size: 20px;
+}
+
+.nav-link {
+    font-size: 17px;
+}
+
+.welcome {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.wanted{
+    text-align: center;
+}
+.wanted img{
+    height: 50%;
+    width: 50%;
+}
+
+.my-container{
+    text-align: center;
+    border: dashed blue 2px;
+    margin-top: 25px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
