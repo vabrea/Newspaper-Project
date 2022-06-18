@@ -3,14 +3,17 @@
 {% block title %}Log In{% endblock title %}
 
 {% block content %}
-<h1>Login</h1>
+<div class="my-container">
 <form  method="POST">
+    <h1>Login</h1>
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value = "Log In">
+    <input type="submit" class="btn btn-primary" value = "Log In">
+    <br />
+    <small> <a href="{% url 'home' %}">Homecoming</a></small>
+    <br />
+    <small><a href="{% url 'password_reset' %}">Forgot Password?</a></small>
 </form>
-<br />
-<small>Click <a href="{% url 'home' %}">Here</a> to go back home</small>
-<br />
-<small><a href="{% url 'password_reset' %}">Forgot Password?</a></small>
+</div>
+
 {% endblock content %}

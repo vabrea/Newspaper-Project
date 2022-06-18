@@ -5,10 +5,14 @@
 
 {% block content %}
 <h1>{{ section }}</h1>
-<ul>
-    {% for article in article_list %}
-    <li><a href="{% url 'article_detail' article.id %}">{{ article.title }}</a></li>
-    {% endfor %}
-</ul>
 
+    {% for article in article_list %}
+        <div class="list-group">
+              <div class="d-block w-100 justify-content-between article-list" onclick="location.href='{% url 'article_detail' article.id %}';" style="cursor: pointer;">
+                <h5 class="mb-1">{{ article.title }}</h5>
+                <p>Posted on {{ article.created_on}}</p>
+                <p>Written By: {{ article.author }}</p>
+              </div>
+    {% endfor %}
 {% endblock content %}
+

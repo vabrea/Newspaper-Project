@@ -7,8 +7,8 @@
 
 <div class="container">
 <br />
-<h1>{{ article.title }}</h1>
-<strong> By {{ article.author }} </strong>
+<h2>{{ article.title }}</h2>
+<strong> By {{ article.author }} | Written on: {{ article.created_on}}</strong>
 <p> {{ article.body }} </p>
 {% if user.is_staff %}
 <a class="btn btn-primary" href="{% url 'article_edit' article.id %}">Edit</a>

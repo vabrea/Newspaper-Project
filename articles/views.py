@@ -1,3 +1,4 @@
+from distutils.log import Log
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
@@ -7,6 +8,11 @@ from django.urls import reverse_lazy
 class ArticleListView(LoginRequiredMixin,ListView):
     template_name = "articles/list.html"
     model = Article
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['article_list'] = Article.objects.filter().order_by('created_on').reverse()
+        return context
 
 class HeadlineArticleListView(ArticleListView, LoginRequiredMixin):
     def get_context_data(self, **kwargs):
@@ -32,19 +38,19 @@ class SportsArticleListView(ArticleListView, LoginRequiredMixin):
         context["section"] = "Sports"
         return context
 
-class ArticleCreateView(CreateView,UserPassesTestMixin, LoginRequiredMixin):
+class ArticleCreateView(LoginRequiredMixin,UserPassesTestMixin,CreateView):
     template_name = "articles/new.html"
     model = Article
     fields = ["title", "author", "section","body"]
 
     def test_func(self):
-        return self.request.user.role > 1
+        return self.request.user.role.id > 2
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class ArticleUpdateView(UpdateView, UserPassesTestMixin,LoginRequiredMixin):
+class ArticleUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
     template_name = "articles/edit.html"
     model = Article
     fields = ["title", "author", "section","body"]
@@ -55,7 +61,7 @@ class ArticleUpdateView(UpdateView, UserPassesTestMixin,LoginRequiredMixin):
             return article.user == self.request.user.role.id > 1
         return False
 
-class ArticleDeleteView(DeleteView, LoginRequiredMixin):
+class ArticleDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
     template_name = "articles/delete.html"
     model = Article
     success_url = reverse_lazy("article_list")

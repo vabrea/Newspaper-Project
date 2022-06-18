@@ -6,8 +6,22 @@
 <div class="container welcome">
     <img src="../static/img/logo.png" alt="">
 </div>
+{% if user.is_authenticated %}
+<div class="article-container">
+        <div class="headlines" onclick="location.href='{% url 'headline_list' %}';" style="cursor: pointer;">
+            <p>HEADLINE NEWS</p>
+        </div>
+        <div class="spiderman" onclick="location.href='{% url 'spider_list' %}';" style="cursor: pointer;">
+            <p>SPIDEY SIGHTINGS</p>
+        </div>
+        <div class="sports" onclick="location.href='{% url 'sports_list' %}';" style="cursor: pointer;">
+            <p>SPORTS PAGE</p>
+        </div> 
+</div>
+
+{% else %}
 <div class="container wanted">
     <img src="../static/img/wanted.jpg" alt="">
 </div>
-
+{% endif %}
 {% endblock content %}
